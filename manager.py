@@ -147,3 +147,9 @@ class LibraryDBManager:
                 WHERE id = ?
             """, (book_id,))
             return True
+
+    # вывести всех читателей
+    def get_all_readers(self) -> List[tuple]:
+        # Получает список всех зарегистрированных читателей (id, full_name)
+        with sqlite3.connect(self.db_path) as conn:
+            return conn.execute("SELECT id, full_name FROM readers ORDER BY full_name").fetchall()
